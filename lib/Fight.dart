@@ -15,12 +15,16 @@ final Character character1,character2;
     var rng = new Random();
     var war=rng.nextInt(100);
     
+    
     if(character1.Szansa >war){
       character2.HP-=character1.Moc;
     } 
+    war=rng.nextInt(100);
     if(character2.Szansa >war){
       character1.HP-=character2.Moc;
     }
+
+    
   }
 
 }

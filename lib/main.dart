@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:myflutek/Fight.dart';
 
@@ -15,10 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FightMagicka',
-      theme: ThemeData(
-        primarySwatch: Colors.brown,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: ThemeData(primarySwatch: Colors.teal, fontFamily: 'Pacifico'),
       home: MyHomePage(title: 'Magicka'),
     );
   }
@@ -43,17 +42,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  Character character1=new Character(100,200,20,80);
-  Character character2=new Character(100,200,30,60);
+  Character character1 = new Character(100, 200, 20, 80);
+  Character character2 = new Character(100, 200, 30, 40);
 
   void _incrementCounter() {
     setState(() {
-
-     var fight= Fight(character1,character2);
-     fight.startFight();
+      var fight = Fight(character1, character2);
+      fight.startFight();
       print(character1.HP);
       print(character2.HP);
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      character1 = new Character(100, 200, 20, 80);
+      character2 = new Character(100, 200, 30, 40);
     });
   }
 
@@ -61,34 +65,74 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings_backup_restore),
+            onPressed: () {
+              _reset();
+            },
+          ),
+        ],
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CardGame(
-              Asset: "assets/magicka.jpg",
-              HP:character1.HP.toString(),
-              Mana: character1.Mana.toString(),
-              Moc:character1.Moc.toString(),
-              Szansa: character1.Szansa.toString(),),
-            FloatingActionButton(onPressed: () { 
-              _incrementCounter();
-             },
-            child: Text("VS"),
-
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: ExactAssetImage('assets/forest.jpg'),
+              fit: BoxFit.fitHeight,
             ),
-            CardGame(Asset: "assets/warrior.jpg",
-            HP:character2.HP.toString(),
-              Mana: character2.Mana.toString(),
-              Moc:character2.Moc.toString(),
-              Szansa: character2.Szansa.toString(),)
-          ],
+          ),
+          // color: Colors.brown,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+            child: Container(
+              decoration: BoxDecoration(color: Colors.white.withOpacity(0.4)),
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    // horizontal).
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CardGame(
+                        Asset: "assets/magicka.jpg",
+                        HP: character1.HP.toString(),
+                        Mana: character1.Mana.toString(),
+                        Moc: character1.Moc.toString(),
+                        Szansa: character1.Szansa.toString(),
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {
+                          _incrementCounter();
+                          if (character1.HP < 0) {
+                            AlertDialog(
+                                title: Text("Title"),
+                                content: Text("tekst"),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('Ok'),
+                                    onPressed: () {},
+                                  )
+                                ]);
+                          }
+                        },
+                        child: Text("VS"),
+                      ),
+                      CardGame(
+                        Asset: "assets/warrior.jpg",
+                        HP: character2.HP.toString(),
+                        Mana: character2.Mana.toString(),
+                        Moc: character2.Moc.toString(),
+                        Szansa: character2.Szansa.toString(),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
 }
-
