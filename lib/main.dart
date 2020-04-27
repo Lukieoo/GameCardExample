@@ -104,16 +104,33 @@ class _MyHomePageState extends State<MyHomePage> {
                       FloatingActionButton(
                         onPressed: () {
                           _incrementCounter();
-                          if (character1.HP < 0) {
-                            AlertDialog(
-                                title: Text("Title"),
-                                content: Text("tekst"),
+                           if (character1.HP <= 0 || character2.HP <= 0  ) {
+                                  
+                                  var winner=(character1.HP <= 0 )?"Hero Down":"Hero Up";
+                                  var winner2=(character2.HP <= 0 )?"Hero Up":"Hero Down";
+
+                                  if(winner!=winner2){
+                                      winner="Remis";
+                                  }
+
+                          showDialog<void>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text("Zwycięzcom zostaje"),
+                                content: Text(winner),
                                 actions: <Widget>[
                                   FlatButton(
                                     child: Text('Ok'),
-                                    onPressed: () {},
-                                  )
-                                ]);
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      _reset();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                           }
                         },
                         child: Text("VS"),

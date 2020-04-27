@@ -51,8 +51,8 @@ class _CardGameState extends State<CardGame> {
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                             child: Image(
                                 image: AssetImage(widget.Asset),
-                                width: 200,
-                                height: 200,
+                                width: 150,
+                                height: 150,
                                 fit: BoxFit.cover),
                           ),
                         ),
