@@ -21,12 +21,14 @@ class Fight {
         {
           if (character1.Mana > character1.Power) {
             if (character1.Effectiveness > war) {
-              character2.HP -= character1.Power;
+              var punch = (character1.Power * (1.0 - character2.Armor / 100));
+              character2.HP -= punch.toInt();
+
               if (war == 1) {
                 character2.HP -= character1.Power * 2;
               }
             }
-            character1.Mana -= character1.Power;
+            character1.Mana -= character1.Power~/2;
           }
           break;
         }
@@ -34,12 +36,14 @@ class Fight {
         {
           if (character1.Mana > character1.Power) {
             if (character1.Effectiveness > war) {
-              character2.HP -= character1.Power;
+              var punch = (character1.Power * (1.0 - character2.Armor / 100));
+              character2.HP -= punch.toInt();
+
               if (war == 1) {
                 character2.HP -= character1.Power * 2;
               }
             }
-            character1.Mana -= character1.Power;
+            character1.Mana -= character1.Power~/2;
           }
           break;
         }
@@ -47,12 +51,14 @@ class Fight {
         {
           if (character1.Condition > character1.Power) {
             if (character1.Effectiveness > war) {
-              character2.HP -= character1.Power;
+              var punch = (character1.Power * (1.0 - character2.Armor / 100));
+              character2.HP -= punch.toInt();
+
               if (war == 1) {
                 character2.HP -= character1.Power * 2;
               }
             }
-            character1.Condition -= character1.Power;
+            character1.Condition -= character1.Power~/2;
           }
           break;
         }
@@ -66,12 +72,14 @@ class Fight {
         {
           if (character2.Mana > character2.Power) {
             if (character2.Effectiveness > war) {
-              character1.HP -= character2.Power;
+              var punch = (character2.Power * (1.0 - character1.Armor / 100));
+              character1.HP -= punch.toInt();
+
               if (war == 1) {
                 character1.HP -= character2.Power * 2;
               }
             }
-            character2.Mana -= character2.Power;
+            character2.Mana -= character2.Power~/2;
           }
           break;
         }
@@ -79,12 +87,14 @@ class Fight {
         {
           if (character2.Mana > character2.Power) {
             if (character2.Effectiveness > war) {
-              character1.HP -= character2.Power;
+              var punch = (character2.Power * (1.0 - character1.Armor / 100));
+              character1.HP -= punch.toInt();
+
               if (war == 1) {
                 character1.HP -= character2.Power * 2;
               }
             }
-            character2.Mana -= character2.Power;
+            character2.Mana -= character2.Power~/2;
           }
           break;
         }
@@ -92,12 +102,14 @@ class Fight {
         {
           if (character2.Condition > character2.Power) {
             if (character2.Effectiveness > war) {
-              character1.HP -= character2.Power;
+              var punch = (character2.Power * (1.0 - character1.Armor / 100));
+              character1.HP -= punch.toInt();
+ 
               if (war == 1) {
                 character1.HP -= character2.Power * 2;
               }
             }
-            character2.Condition -= character2.Power;
+            character2.Condition -= character2.Power~/2;
           }
           break;
         }

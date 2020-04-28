@@ -43,9 +43,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Character   character1 = new Character(Asset: "assets/magicka.jpg", HP: 1000,Mana: 250,Condition: 200,Power: 40,Effectiveness: 55,Armor: 10,Kind: NameKind.wojownik);
-  Character character2 = new Character(Asset: "assets/warrior.jpg", HP: 1000,Mana: 250,Condition: 200,Power: 40,Effectiveness: 55,Armor: 10,Kind: NameKind.magBurzy);
-      
+  Character character1 = new Character(
+      Asset: "assets/magicka.jpg",
+      HP: 1000,
+      Mana: 450,
+      Condition: 200,
+      Power: 240,
+      Effectiveness: 55,
+      Armor: 11,
+      Kind: NameKind.wojownik);
+  Character character2 = new Character(
+      Asset: "assets/warrior.jpg",
+      HP: 1000,
+      Mana: 450,
+      Condition: 200,
+      Power: 200,
+      Effectiveness: 60,
+      Armor: 12,
+      Kind: NameKind.druid);
 
   void _incrementCounter() {
     setState(() {
@@ -58,9 +73,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _reset() {
     setState(() {
-      character1 = new Character(Asset: "assets/magicka.jpg", HP: 1000,Mana: 250,Condition: 200,Power: 40,Effectiveness: 55,Armor: 10,Kind: NameKind.magBurzy);
-      character2 = new Character(Asset: "assets/warrior.jpg", HP: 1000,Mana: 250,Condition: 200,Power: 40,Effectiveness: 55,Armor: 10,Kind: NameKind.wojownik);
-       
+      character1 = new Character(
+          Asset: "assets/magicka.jpg",
+          HP: 1000,
+          Mana: 450,
+          Condition: 200,
+          Power: 240,
+          Effectiveness: 55,
+          Armor: 11,
+          Kind: NameKind.wojownik);
+      character2 = new Character(
+          Asset: "assets/warrior.jpg",
+          HP: 1000,
+          Mana: 450,
+          Condition: 200,
+          Power: 200,
+          Effectiveness: 60,
+          Armor: 12,
+          Kind: NameKind.druid);
     });
   }
 
@@ -98,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CardGame(
-                       character: character1,
+                        character: character1,
                       ),
                       FloatingActionButton(
                         onPressed: () {
@@ -136,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text("VS"),
                       ),
                       CardGame(
-                            character: character2,
+                        character: character2,
                       )
                     ],
                   ),
