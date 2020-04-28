@@ -1,18 +1,21 @@
-import 'package:flutter/material.dart';
-
-class Character{
+class Character {
+  String Asset;
   int HP;
   int Mana;
-  int Moc;
-  int Szansa;
+  int Condition;
+  int Power;
+  int Effectiveness;
+  int Armor;
+  var Kind;
 
-  Character(
-    
-      @required this.HP,
-      @required this.Mana,
-      @required this.Moc,
-      @required this.Szansa,
-    
-  );
-
+  Character({
+    this.Asset,
+    this.HP,
+    this.Mana,
+    this.Condition,
+    this.Power,
+    this.Effectiveness,
+    this.Armor,
+    this.Kind,
+  });
 }

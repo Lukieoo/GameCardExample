@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:myflutek/Fight.dart';
 
 import 'Character.dart';
+import 'Kind_Enum.dart';
 import 'cardGame.dart';
 
 void main() {
@@ -42,8 +43,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Character character1 = new Character(100, 200, 20, 80);
-  Character character2 = new Character(100, 200, 30, 40);
+  Character   character1 = new Character(Asset: "assets/magicka.jpg", HP: 1000,Mana: 250,Condition: 200,Power: 40,Effectiveness: 55,Armor: 10,Kind: NameKind.wojownik);
+  Character character2 = new Character(Asset: "assets/warrior.jpg", HP: 1000,Mana: 250,Condition: 200,Power: 40,Effectiveness: 55,Armor: 10,Kind: NameKind.magBurzy);
+      
 
   void _incrementCounter() {
     setState(() {
@@ -56,8 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _reset() {
     setState(() {
-      character1 = new Character(100, 200, 20, 80);
-      character2 = new Character(100, 200, 30, 40);
+      character1 = new Character(Asset: "assets/magicka.jpg", HP: 1000,Mana: 250,Condition: 200,Power: 40,Effectiveness: 55,Armor: 10,Kind: NameKind.magBurzy);
+      character2 = new Character(Asset: "assets/warrior.jpg", HP: 1000,Mana: 250,Condition: 200,Power: 40,Effectiveness: 55,Armor: 10,Kind: NameKind.wojownik);
+       
     });
   }
 
@@ -95,52 +98,45 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CardGame(
-                        Asset: "assets/magicka.jpg",
-                        HP: character1.HP.toString(),
-                        Mana: character1.Mana.toString(),
-                        Moc: character1.Moc.toString(),
-                        Szansa: character1.Szansa.toString(),
+                       character: character1,
                       ),
                       FloatingActionButton(
                         onPressed: () {
                           _incrementCounter();
-                           if (character1.HP <= 0 || character2.HP <= 0  ) {
-                                  
-                                  var winner=(character1.HP <= 0 )?"Hero Down":"Hero Up";
-                                  var winner2=(character2.HP <= 0 )?"Hero Up":"Hero Down";
+                          if (character1.HP <= 0 || character2.HP <= 0) {
+                            var winner =
+                                (character1.HP <= 0) ? "Hero Down" : "Hero Up";
+                            var winner2 =
+                                (character2.HP <= 0) ? "Hero Up" : "Hero Down";
 
-                                  if(winner!=winner2){
-                                      winner="Remis";
-                                  }
+                            if (winner != winner2) {
+                              winner = "Remis";
+                            }
 
-                          showDialog<void>(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text("Zwycięzcom zostaje"),
-                                content: Text(winner),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: Text('Ok'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      _reset();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                            showDialog<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Zwycięzcom zostaje"),
+                                  content: Text(winner),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text('Ok'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        _reset();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           }
                         },
                         child: Text("VS"),
                       ),
                       CardGame(
-                        Asset: "assets/warrior.jpg",
-                        HP: character2.HP.toString(),
-                        Mana: character2.Mana.toString(),
-                        Moc: character2.Moc.toString(),
-                        Szansa: character2.Szansa.toString(),
+                            character: character2,
                       )
                     ],
                   ),

@@ -1,11 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:myflutek/Character.dart';
 
 class CardGame extends StatefulWidget {
-  final String Asset, HP, Mana, Moc, Szansa;
+  final Character character;
 
-  const CardGame({this.Asset, this.HP, this.Mana, this.Moc, this.Szansa});
+  const CardGame({this.character});
 
   @override
   _CardGameState createState() => _CardGameState();
@@ -31,15 +32,14 @@ class _CardGameState extends State<CardGame> {
             child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage(widget.Asset),
+                image: AssetImage(widget.character.Asset),
                 fit: BoxFit.cover,
               )),
               width: double.infinity,
               child: BackdropFilter(
-               filter:  ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                
+                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                 child: Container(
-                   color: Colors.grey.withOpacity(0.1),
+                  color: Colors.grey.withOpacity(0.1),
                   child: Center(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -48,22 +48,81 @@ class _CardGameState extends State<CardGame> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            child: Image(
-                                image: AssetImage(widget.Asset),
-                                width: 150,
-                                height: 150,
-                                fit: BoxFit.cover),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            child: SizedBox(
+                              width: 150,
+                              height: 150,
+                              child: Stack(children: <Widget>[
+                                Container(
+                                  child: Image(
+                                      image: AssetImage(widget.character.Asset),
+                                      width: 150,
+                                      height: 150,
+                                      fit: BoxFit.cover),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(5.0),
+                                  alignment: Alignment.bottomLeft,
+                                  child: SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                    child: Stack(
+                                      children:<Widget>[
+                                         Image(
+                                          image: AssetImage("assets/power.png"),
+                                          width: 40,
+                                          height: 40,
+                                          fit: BoxFit.contain),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 15.0),
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Text("${widget.character.Power}",style: TextStyle(color: Colors.white, fontSize: 15.0)),
+                                            ),
+                                          )
+                                          ] ),
+                                ),
+                                ),
+                                 Container(
+                                  padding: EdgeInsets.only(right: 5,top: 10,bottom: 0),
+                                  alignment: Alignment.bottomRight,
+                                  child: SizedBox(
+                                    width: 45,
+                                    height:45,
+                                    child: Stack(
+                                      children:<Widget>[
+                                         Image(
+                                          image: AssetImage("assets/shield.png"),
+                                          width: 45,
+                                          height: 45,
+                                          fit: BoxFit.contain),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 0.0),
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Text("${widget.character.Armor}",style: TextStyle(color: Colors.white, fontSize: 15.0)),
+                                            ),
+                                          )
+                                          ] ),
+                                ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Text("HP : ${widget.HP}",
-                            style: TextStyle(color: Colors.white,fontFamily: 'Pacifico')),
-                        Text("Mana : ${widget.Mana}",
-                            style: TextStyle(color: Colors.white,fontFamily: 'Pacifico')),
-                        Text("Moc : ${widget.Moc}",
-                            style: TextStyle(color: Colors.white,fontFamily: 'Pacifico')),
-                        Text("Szansa : ${widget.Szansa} %",
-                            style: TextStyle(color: Colors.white,fontFamily: 'Pacifico')),
+                        )),
+                        Text("HP : ${widget.character.HP}",
+                            style: TextStyle(
+                                color: Colors.white, fontFamily: 'Pacifico')),
+                        Text("Mana : ${widget.character.Mana}",
+                            style: TextStyle(
+                                color: Colors.white, fontFamily: 'Pacifico')),
+                        Text("Kondycja : ${widget.character.Condition}",
+                            style: TextStyle(
+                                color: Colors.white, fontFamily: 'Pacifico')),
+                        Text("Szansa : ${widget.character.Effectiveness} %",
+                            style: TextStyle(
+                                color: Colors.white, fontFamily: 'Pacifico')),
                       ],
                     ),
                   )),
