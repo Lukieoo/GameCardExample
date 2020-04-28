@@ -42,3 +42,16 @@ kindToPower(NameKind skill){
   }
 
 }
+kindToAsset(NameKind asset){
+  switch (asset) {
+    case NameKind.magBurzy:
+      return "assets/magicka.jpg";
+    case NameKind.wojownik:
+      return "assets/wojownik.jpg";
+     case NameKind.druid:
+      return "assets/druid.jpg";
+    default:
+      return "No name";
+  }
+
+}

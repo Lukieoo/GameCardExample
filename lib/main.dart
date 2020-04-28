@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FightMagicka',
-      theme: ThemeData(primarySwatch: Colors.teal, fontFamily: 'Pacifico'),
+      theme: ThemeData(primarySwatch: Colors.teal, fontFamily: 'Bangers'),
       home: MyHomePage(title: 'Magicka'),
     );
   }
@@ -43,22 +44,70 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Timer _timer;
+  int _start = 0;
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) => setState(
+        () {
+          if (character1.HP <= 0 || character2.HP <= 0) {
+            var winner = (character1.HP <= 0) ? "Hero Down" : "Hero Up";
+            var winner2 = (character2.HP <= 0) ? "Hero Up" : "Hero Down";
+
+            if (winner != winner2) {
+              winner = "Remis";
+            }
+
+            showDialog<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Zwycięzcom zostaje"),
+                  content: Text(winner),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text('Ok'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        _reset();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+
+            timer.cancel();
+            _start = 0;
+          } else {
+            _incrementCounter();
+            _start = _start + 1;
+          }
+        },
+      ),
+    );
+  }
+
   Character character1 = new Character(
-      Asset: "assets/magicka.jpg",
-      HP: 1000,
-      Mana: 450,
-      Condition: 200,
-      Power: 240,
-      Effectiveness: 55,
-      Armor: 11,
+      Nick: "Zaforia",
+      HP: 10000,
+      Mana: 200,
+      Condition: 8000,
+      Power: 1240,
+      Effectiveness: 45,
+      Armor: 25,
       Kind: NameKind.wojownik);
+
   Character character2 = new Character(
-      Asset: "assets/warrior.jpg",
-      HP: 1000,
-      Mana: 450,
+      Nick: "Wertusa",
+      HP: 15000,
+      Mana: 9050,
       Condition: 200,
-      Power: 200,
-      Effectiveness: 60,
+      Power: 2850,
+      Effectiveness: 30,
       Armor: 12,
       Kind: NameKind.druid);
 
@@ -73,24 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _reset() {
     setState(() {
-      character1 = new Character(
-          Asset: "assets/magicka.jpg",
-          HP: 1000,
-          Mana: 450,
-          Condition: 200,
-          Power: 240,
-          Effectiveness: 55,
-          Armor: 11,
-          Kind: NameKind.wojownik);
-      character2 = new Character(
-          Asset: "assets/warrior.jpg",
-          HP: 1000,
-          Mana: 450,
-          Condition: 200,
-          Power: 200,
-          Effectiveness: 60,
-          Armor: 12,
-          Kind: NameKind.druid);
+      character1.returnCharacter();
+      character2.returnCharacter();
     });
   }
 
@@ -98,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF003300),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings_backup_restore),
@@ -108,19 +142,20 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: ExactAssetImage('assets/forest.jpg'),
-              fit: BoxFit.fitHeight,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: ExactAssetImage('assets/forest.jpg'),
+            fit: BoxFit.fitHeight,
           ),
+        ),
+        child: BackdropFilter(
+           filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
           // color: Colors.brown,
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          child: Center(
+           
             child: Container(
-              decoration: BoxDecoration(color: Colors.white.withOpacity(0.4)),
+            //  decoration: BoxDecoration(color: Colors.white.withOpacity(0.4)),
               child: SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -132,36 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       FloatingActionButton(
                         onPressed: () {
-                          _incrementCounter();
-                          if (character1.HP <= 0 || character2.HP <= 0) {
-                            var winner =
-                                (character1.HP <= 0) ? "Hero Down" : "Hero Up";
-                            var winner2 =
-                                (character2.HP <= 0) ? "Hero Up" : "Hero Down";
-
-                            if (winner != winner2) {
-                              winner = "Remis";
-                            }
-
-                            showDialog<void>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text("Zwycięzcom zostaje"),
-                                  content: Text(winner),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      child: Text('Ok'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        _reset();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
+                          startTimer();
                         },
                         child: Text("VS"),
                       ),

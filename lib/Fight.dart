@@ -156,17 +156,17 @@ class Fight {
     switch (character1.Kind) {
       case NameKind.magBurzy:
         {
-          if (character1.Mana > 400) character1.Mana = 400;
+          if (character1.Mana > character1.ManaCp) character1.Mana = character1.ManaCp;
           break;
         }
       case NameKind.druid:
         {
-          if (character1.Mana > 400) character1.Mana = 400;
+          if (character1.Mana > character1.ManaCp) character1.Mana = character1.ManaCp;
           break;
         }
       case NameKind.wojownik:
         {
-          if (character1.Condition > 400) character1.Condition = 400;
+          if (character1.Condition > character1.ConditionCp) character1.Condition = character1.ConditionCp;
           break;
         }
     }
@@ -174,17 +174,17 @@ class Fight {
     switch (character2.Kind) {
       case NameKind.magBurzy:
         {
-          if (character2.Mana > 400) character2.Mana = 400;
+          if (character2.Mana > character2.ManaCp) character2.Mana =  character2.ManaCp;
           break;
         }
       case NameKind.druid:
         {
-          if (character2.Mana > 400) character2.Mana = 400;
+          if (character2.Mana >  character2.ManaCp) character2.Mana =  character2.ManaCp;
           break;
         }
       case NameKind.wojownik:
         {
-          if (character2.Condition > 400) character2.Condition = 400;
+          if (character2.Condition >  character2.ConditionCp) character2.Condition =  character2.ConditionCp;
           break;
         }
     }

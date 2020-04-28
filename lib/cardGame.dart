@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:myflutek/Character.dart';
 
+import 'Kind_Enum.dart';
+
 class CardGame extends StatefulWidget {
   final Character character;
 
@@ -32,7 +34,7 @@ class _CardGameState extends State<CardGame> {
             child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage(widget.character.Asset),
+                image: AssetImage(kindToAsset(widget.character.Kind)),
                 fit: BoxFit.cover,
               )),
               width: double.infinity,
@@ -58,10 +60,35 @@ class _CardGameState extends State<CardGame> {
                                     Container(
                                       child: Image(
                                           image: AssetImage(
-                                              widget.character.Asset),
+                                              kindToAsset(widget.character.Kind)),
                                           width: 150,
                                           height: 150,
-                                          fit: BoxFit.cover),
+                                          fit: BoxFit.cover,
+                                          alignment: new Alignment(-1.0, -1.0)),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                      widget.character.Nick,
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          shadows: <Shadow>[
+                                            Shadow(
+                                              offset: Offset(1.0, 1.0),
+                                              blurRadius: 3.0,
+                                              color:
+                                                  Color.fromARGB(255,0, 0, 0),
+                                            ),
+                                            Shadow(
+                                              offset: Offset(1.0, 1.0),
+                                              blurRadius: 8.0,
+                                              color: Color.fromARGB(
+                                                  255,0, 0, 0),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                     Container(
                                       padding: EdgeInsets.all(5.0),
@@ -93,17 +120,17 @@ class _CardGameState extends State<CardGame> {
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(
-                                          right: 5, top: 10, bottom: 0),
+                                          right: 5, top: 15, bottom: 0),
                                       alignment: Alignment.bottomRight,
                                       child: SizedBox(
-                                        width: 45,
-                                        height: 45,
+                                        width: 40,
+                                        height: 40,
                                         child: Stack(children: <Widget>[
                                           Image(
                                               image: AssetImage(
                                                   "assets/shield.png"),
-                                              width: 45,
-                                              height: 45,
+                                              width: 40,
+                                              height: 40,
                                               fit: BoxFit.contain),
                                           Padding(
                                             padding:
@@ -112,6 +139,34 @@ class _CardGameState extends State<CardGame> {
                                               alignment: Alignment.center,
                                               child: Text(
                                                   "${widget.character.Armor}",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.0)),
+                                            ),
+                                          )
+                                        ]),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      alignment: Alignment.bottomCenter,
+                                      child: SizedBox(
+                                        width: 30,
+                                        height: 30,
+                                        child: Stack(children: <Widget>[
+                                          Image(
+                                              image: AssetImage(
+                                                  "assets/archer.png"),
+                                              width: 30,
+                                              height: 30,
+                                              fit: BoxFit.contain),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 0.0),
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                  "${widget.character.Effectiveness}",
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 15.0)),
@@ -135,19 +190,21 @@ class _CardGameState extends State<CardGame> {
                                       BorderRadius.all(Radius.circular(10.0)),
                                   child: Container(
                                     child: SizedBox(
-                                      
                                       child: Stack(
                                         children: <Widget>[
-                                            Container(
-                                            width: ((widget.character.HP>0)?240*(widget.character.HP/1000):1),
+                                          Container(
+                                            width: ((widget.character.HP > 0)
+                                                ? 240 *
+                                                    (widget.character.HP /
+                                                        widget.character.HPCp)
+                                                : 1),
                                             alignment: Alignment.topLeft,
                                             color: Color(0xAAd32f2f)
                                                 .withOpacity(0.9),
                                             child: Text(
-                                                "",
-                                                 ),
+                                              "",
+                                            ),
                                           ),
-                                         
                                           Container(
                                             alignment: Alignment.center,
                                             color: Color(0xFF7f0000)
@@ -156,9 +213,8 @@ class _CardGameState extends State<CardGame> {
                                                 "HP : ${widget.character.HP}",
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontFamily: 'Pacifico')),
+                                                    fontFamily: 'Bangers')),
                                           ),
-                                         
                                         ],
                                       ),
                                     ),
@@ -168,15 +224,100 @@ class _CardGameState extends State<CardGame> {
                             ),
                           ),
                         ),
-                        Text("Mana : ${widget.character.Mana}",
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: 'Pacifico')),
-                        Text("Kondycja : ${widget.character.Condition}",
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: 'Pacifico')),
-                        Text("Szansa : ${widget.character.Effectiveness} %",
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: 'Pacifico')),
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Container(
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Stack(children: <Widget>[
+                                ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  child: Container(
+                                    child: SizedBox(
+                                      child: Stack(
+                                        children: <Widget>[
+                                          Container(
+                                            width: ((widget.character.Mana > 0)
+                                                ? 240 *
+                                                    (widget.character.Mana /
+                                                        widget.character.ManaCp)
+                                                : 1),
+                                            alignment: Alignment.topLeft,
+                                            color: Color(0xAA1565c0)
+                                                .withOpacity(0.9),
+                                            child: Text(
+                                              "",
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            color: Color(0xFF002171)
+                                                .withOpacity(0.5),
+                                            child: Text(
+                                                "Mana : ${widget.character.Mana}",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: 'Bangers')),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Container(
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Stack(children: <Widget>[
+                                ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  child: Container(
+                                    child: SizedBox(
+                                      child: Stack(
+                                        children: <Widget>[
+                                          Container(
+                                            width:
+                                                ((widget.character.Condition >
+                                                        0)
+                                                    ? 240 *
+                                                        (widget.character
+                                                                .Condition /
+                                                            widget.character
+                                                                .ConditionCp)
+                                                    : 1),
+                                            alignment: Alignment.topLeft,
+                                            color: Color(0xAA558b2f)
+                                                .withOpacity(0.9),
+                                            child: Text(
+                                              "",
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            color: Color(0xFF33691e)
+                                                .withOpacity(0.5),
+                                            child: Text(
+                                                "Kondycja : ${widget.character.Condition}",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: 'Bangers')),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   )),
