@@ -20,11 +20,11 @@ kindToName(NameKind skill){
 kindToSkill(NameKind skill){
   switch (skill) {
     case NameKind.magBurzy:
-      return "Piorun";
+      return "assets/shootblue.gif";
     case NameKind.wojownik:
-      return "Mocne Uderzenie";
+      return "assets/blade.gif";
      case NameKind.druid:
-      return "Leczenie";
+      return  "assets/fireball.gif";
     default:
       return "No name";
   }
@@ -42,6 +42,7 @@ kindToPower(NameKind skill){
   }
 
 }
+
 kindToAsset(NameKind asset){
   switch (asset) {
     case NameKind.magBurzy:

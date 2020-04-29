@@ -24,11 +24,15 @@ class Fight {
               var punch = (character1.Power * (1.0 - character2.Armor / 100));
               character2.HP -= punch.toInt();
 
+              character2.isHit = true;
+
               if (war == 1) {
                 character2.HP -= character1.Power * 2;
               }
+            } else {
+              character2.isHit = false;
             }
-            character1.Mana -= character1.Power~/2;
+            character1.Mana -= character1.Power ~/ 2;
           }
           break;
         }
@@ -38,12 +42,15 @@ class Fight {
             if (character1.Effectiveness > war) {
               var punch = (character1.Power * (1.0 - character2.Armor / 100));
               character2.HP -= punch.toInt();
+              character2.isHit = true;
 
               if (war == 1) {
                 character2.HP -= character1.Power * 2;
               }
             }
-            character1.Mana -= character1.Power~/2;
+            character1.Mana -= character1.Power ~/ 2;
+          } else {
+            character2.isHit = false;
           }
           break;
         }
@@ -53,12 +60,15 @@ class Fight {
             if (character1.Effectiveness > war) {
               var punch = (character1.Power * (1.0 - character2.Armor / 100));
               character2.HP -= punch.toInt();
+              character2.isHit = true;
 
               if (war == 1) {
                 character2.HP -= character1.Power * 2;
               }
+            } else {
+              character2.isHit = false;
             }
-            character1.Condition -= character1.Power~/2;
+            character1.Condition -= character1.Power ~/ 2;
           }
           break;
         }
@@ -74,12 +84,14 @@ class Fight {
             if (character2.Effectiveness > war) {
               var punch = (character2.Power * (1.0 - character1.Armor / 100));
               character1.HP -= punch.toInt();
-
+              character1.isHit = true;
               if (war == 1) {
                 character1.HP -= character2.Power * 2;
               }
             }
-            character2.Mana -= character2.Power~/2;
+            character2.Mana -= character2.Power ~/ 2;
+          } else {
+            character1.isHit = false;
           }
           break;
         }
@@ -89,12 +101,14 @@ class Fight {
             if (character2.Effectiveness > war) {
               var punch = (character2.Power * (1.0 - character1.Armor / 100));
               character1.HP -= punch.toInt();
-
+              character1.isHit = true;
               if (war == 1) {
                 character1.HP -= character2.Power * 2;
               }
+            } else {
+              character1.isHit = false;
             }
-            character2.Mana -= character2.Power~/2;
+            character2.Mana -= character2.Power ~/ 2;
           }
           break;
         }
@@ -104,12 +118,14 @@ class Fight {
             if (character2.Effectiveness > war) {
               var punch = (character2.Power * (1.0 - character1.Armor / 100));
               character1.HP -= punch.toInt();
- 
+              character1.isHit = true;
               if (war == 1) {
                 character1.HP -= character2.Power * 2;
               }
+            } else {
+              character1.isHit = false;
             }
-            character2.Condition -= character2.Power~/2;
+            character2.Condition -= character2.Power ~/ 2;
           }
           break;
         }
@@ -156,17 +172,20 @@ class Fight {
     switch (character1.Kind) {
       case NameKind.magBurzy:
         {
-          if (character1.Mana > character1.ManaCp) character1.Mana = character1.ManaCp;
+          if (character1.Mana > character1.ManaCp)
+            character1.Mana = character1.ManaCp;
           break;
         }
       case NameKind.druid:
         {
-          if (character1.Mana > character1.ManaCp) character1.Mana = character1.ManaCp;
+          if (character1.Mana > character1.ManaCp)
+            character1.Mana = character1.ManaCp;
           break;
         }
       case NameKind.wojownik:
         {
-          if (character1.Condition > character1.ConditionCp) character1.Condition = character1.ConditionCp;
+          if (character1.Condition > character1.ConditionCp)
+            character1.Condition = character1.ConditionCp;
           break;
         }
     }
@@ -174,17 +193,20 @@ class Fight {
     switch (character2.Kind) {
       case NameKind.magBurzy:
         {
-          if (character2.Mana > character2.ManaCp) character2.Mana =  character2.ManaCp;
+          if (character2.Mana > character2.ManaCp)
+            character2.Mana = character2.ManaCp;
           break;
         }
       case NameKind.druid:
         {
-          if (character2.Mana >  character2.ManaCp) character2.Mana =  character2.ManaCp;
+          if (character2.Mana > character2.ManaCp)
+            character2.Mana = character2.ManaCp;
           break;
         }
       case NameKind.wojownik:
         {
-          if (character2.Condition >  character2.ConditionCp) character2.Condition =  character2.ConditionCp;
+          if (character2.Condition > character2.ConditionCp)
+            character2.Condition = character2.ConditionCp;
           break;
         }
     }

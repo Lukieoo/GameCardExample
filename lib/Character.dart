@@ -8,6 +8,8 @@ class Character {
   int Armor;
   var Kind;
 
+  var isHit = false;
+
   String NickCp;
   int HPCp;
   int ManaCp;
@@ -16,6 +18,8 @@ class Character {
   int EffectivenessCp;
   int ArmorCp;
   var KindCp;
+
+  var isHitCp= false;
 
   Character({
     this.Nick,
@@ -26,6 +30,7 @@ class Character {
     this.Effectiveness,
     this.Armor,
     this.Kind,
+    this.isHit=false,
   }) {
     copyCharacter();
   }
@@ -39,15 +44,18 @@ class Character {
     EffectivenessCp = Effectiveness;
     ArmorCp = Armor;
     KindCp = Kind;
+    isHitCp = isHit;
   }
+
   returnCharacter() {
-    Nick=NickCp;
+    Nick = NickCp;
     HP = HPCp;
     Mana = ManaCp;
     Condition = ConditionCp;
-    Power= PowerCp;
+    Power = PowerCp;
     Effectiveness = EffectivenessCp;
     Armor = ArmorCp;
     Kind = KindCp;
+    isHit = isHitCp;
   }
 }

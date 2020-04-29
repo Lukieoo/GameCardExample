@@ -54,8 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
       (Timer timer) => setState(
         () {
           if (character1.HP <= 0 || character2.HP <= 0) {
-            var winner = (character1.HP <= 0) ? "Hero Down" : "Hero Up";
-            var winner2 = (character2.HP <= 0) ? "Hero Up" : "Hero Down";
+            var winner =
+                (character1.HP <= 0) ? character2.Nick : character1.Nick;
+            var winner2 =
+                (character2.HP <= 0) ? character1.Nick : character2.Nick;
 
             if (winner != winner2) {
               winner = "Remis";
@@ -96,8 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
       HP: 10000,
       Mana: 200,
       Condition: 8000,
-      Power: 1240,
-      Effectiveness: 45,
+      Power: 240,
+      Effectiveness: 80,
       Armor: 25,
       Kind: NameKind.wojownik);
 
@@ -106,8 +108,8 @@ class _MyHomePageState extends State<MyHomePage> {
       HP: 15000,
       Mana: 9050,
       Condition: 200,
-      Power: 2850,
-      Effectiveness: 30,
+      Power: 250,
+      Effectiveness: 95,
       Armor: 12,
       Kind: NameKind.druid);
 
@@ -120,10 +122,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  bool _visible = true;
+
   void _reset() {
     setState(() {
+      _visible = !_visible;
       character1.returnCharacter();
       character2.returnCharacter();
+      _timer.cancel();
     });
   }
 
@@ -150,12 +156,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         child: BackdropFilter(
-           filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
           // color: Colors.brown,
           child: Center(
-           
             child: Container(
-            //  decoration: BoxDecoration(color: Colors.white.withOpacity(0.4)),
+              //  decoration: BoxDecoration(color: Colors.white.withOpacity(0.4)),
               child: SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -164,15 +169,32 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       CardGame(
                         character: character1,
+                        oponnet: character2,
                       ),
-                      FloatingActionButton(
-                        onPressed: () {
-                          startTimer();
-                        },
-                        child: Text("VS"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          AnimatedOpacity(
+                            opacity: _visible ? 1.0 : 0.0,
+                            duration: Duration(milliseconds: 500),
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                if (_visible) {
+                                  startTimer();
+
+                                  setState(() {
+                                    _visible = !_visible;
+                                  });
+                                }
+                              },
+                              child: Text("Fight"),
+                            ),
+                          ),
+                      
+                        ],
                       ),
                       CardGame(
-                        character: character2,
+                        character: character2,oponnet: character1,
                       )
                     ],
                   ),

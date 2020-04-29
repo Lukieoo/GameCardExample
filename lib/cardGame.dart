@@ -7,8 +7,9 @@ import 'Kind_Enum.dart';
 
 class CardGame extends StatefulWidget {
   final Character character;
+  final Character oponnet;
 
-  const CardGame({this.character});
+  const CardGame({this.character,this.oponnet});
 
   @override
   _CardGameState createState() => _CardGameState();
@@ -59,8 +60,8 @@ class _CardGameState extends State<CardGame> {
                                   children: <Widget>[
                                     Container(
                                       child: Image(
-                                          image: AssetImage(
-                                              kindToAsset(widget.character.Kind)),
+                                          image: AssetImage(kindToAsset(
+                                              widget.character.Kind)),
                                           width: 150,
                                           height: 150,
                                           fit: BoxFit.cover,
@@ -70,7 +71,7 @@ class _CardGameState extends State<CardGame> {
                                       padding: EdgeInsets.all(5.0),
                                       alignment: Alignment.topCenter,
                                       child: Text(
-                                      widget.character.Nick,
+                                        widget.character.Nick,
                                         style: TextStyle(
                                           color: Colors.green,
                                           shadows: <Shadow>[
@@ -78,15 +79,34 @@ class _CardGameState extends State<CardGame> {
                                               offset: Offset(1.0, 1.0),
                                               blurRadius: 3.0,
                                               color:
-                                                  Color.fromARGB(255,0, 0, 0),
+                                                  Color.fromARGB(255, 0, 0, 0),
                                             ),
                                             Shadow(
                                               offset: Offset(1.0, 1.0),
                                               blurRadius: 8.0,
-                                              color: Color.fromARGB(
-                                                  255,0, 0, 0),
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
                                             ),
                                           ],
+                                        ),
+                                      ),
+                                    ),
+                                    AnimatedOpacity(
+                                      opacity: widget.oponnet.isHit ? 1.0 : 0.0,
+                                      duration: Duration(milliseconds: 500),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        margin: EdgeInsets.only(bottom: 20),
+                                        child: RotatedBox(
+                                          quarterTurns: 0,
+                                          child: Container(
+                                              height: 70,
+                                              width: 70,
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                image: AssetImage(kindToSkill(
+                                                    widget.character.Kind)),
+                                              ))),
                                         ),
                                       ),
                                     ),
@@ -183,7 +203,7 @@ class _CardGameState extends State<CardGame> {
                           padding: const EdgeInsets.all(3.0),
                           child: Container(
                             child: SizedBox(
-                              width: double.infinity,
+                              width: 200,
                               child: Stack(children: <Widget>[
                                 ClipRRect(
                                   borderRadius:
@@ -194,7 +214,7 @@ class _CardGameState extends State<CardGame> {
                                         children: <Widget>[
                                           Container(
                                             width: ((widget.character.HP > 0)
-                                                ? 240 *
+                                                ? 200 *
                                                     (widget.character.HP /
                                                         widget.character.HPCp)
                                                 : 1),
@@ -228,7 +248,7 @@ class _CardGameState extends State<CardGame> {
                           padding: const EdgeInsets.all(3.0),
                           child: Container(
                             child: SizedBox(
-                              width: double.infinity,
+                              width: 200,
                               child: Stack(children: <Widget>[
                                 ClipRRect(
                                   borderRadius:
@@ -239,7 +259,7 @@ class _CardGameState extends State<CardGame> {
                                         children: <Widget>[
                                           Container(
                                             width: ((widget.character.Mana > 0)
-                                                ? 240 *
+                                                ? 200 *
                                                     (widget.character.Mana /
                                                         widget.character.ManaCp)
                                                 : 1),
@@ -273,7 +293,7 @@ class _CardGameState extends State<CardGame> {
                           padding: const EdgeInsets.all(3.0),
                           child: Container(
                             child: SizedBox(
-                              width: double.infinity,
+                              width: 200,
                               child: Stack(children: <Widget>[
                                 ClipRRect(
                                   borderRadius:
@@ -286,7 +306,7 @@ class _CardGameState extends State<CardGame> {
                                             width:
                                                 ((widget.character.Condition >
                                                         0)
-                                                    ? 240 *
+                                                    ? 200 *
                                                         (widget.character
                                                                 .Condition /
                                                             widget.character
