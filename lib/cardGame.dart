@@ -40,7 +40,7 @@ class _CardGameState extends State<CardGame> {
               )),
               width: double.infinity,
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
                 child: Container(
                   color: Colors.grey.withOpacity(0.1),
                   child: Center(
@@ -73,19 +73,19 @@ class _CardGameState extends State<CardGame> {
                                       child: Text(
                                         widget.character.Nick,
                                         style: TextStyle(
-                                          color: Colors.green,
+                                          color: Colors.black,
                                           shadows: <Shadow>[
                                             Shadow(
                                               offset: Offset(1.0, 1.0),
                                               blurRadius: 3.0,
                                               color:
-                                                  Color.fromARGB(255, 0, 0, 0),
+                                                  Color.fromARGB(255, 0, 140, 0),
                                             ),
                                             Shadow(
                                               offset: Offset(1.0, 1.0),
                                               blurRadius: 8.0,
                                               color:
-                                                  Color.fromARGB(255, 0, 0, 0),
+                                                  Color.fromARGB(255, 0, 140, 0),
                                             ),
                                           ],
                                         ),

@@ -98,8 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
       HP: 10000,
       Mana: 200,
       Condition: 8000,
-      Power: 240,
-      Effectiveness: 80,
+      Power: 840,
+      Effectiveness: 60,
       Armor: 25,
       Kind: NameKind.wojownik);
 
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
       HP: 15000,
       Mana: 9050,
       Condition: 200,
-      Power: 250,
+      Power: 750,
       Effectiveness: 95,
       Armor: 12,
       Kind: NameKind.druid);
@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF003300),
+        backgroundColor: Color(0xFF003300).withOpacity(0.6),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings_backup_restore),
@@ -151,12 +151,12 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: ExactAssetImage('assets/forest.jpg'),
-            fit: BoxFit.fitHeight,
+            image: ExactAssetImage('assets/arena.jpg'),
+            fit: BoxFit.cover,
           ),
         ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
           // color: Colors.brown,
           child: Center(
             child: Container(
