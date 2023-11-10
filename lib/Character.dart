@@ -10,27 +10,27 @@ class Character {
 
   var isHit = false;
 
-  String NickCp;
-  int HPCp;
-  int ManaCp;
-  int ConditionCp;
-  int PowerCp;
-  int EffectivenessCp;
-  int ArmorCp;
+  String NickCp = "";
+  int HPCp = 0;
+  int ManaCp = 0;
+  int ConditionCp = 0;
+  int PowerCp = 0;
+  int EffectivenessCp = 0;
+  int ArmorCp = 0;
   var KindCp;
 
-  var isHitCp= false;
+  var isHitCp = false;
 
   Character({
-    this.Nick,
-    this.HP,
-    this.Mana,
-    this.Condition,
-    this.Power,
-    this.Effectiveness,
-    this.Armor,
+    required this.Nick,
+    required this.HP,
+    required this.Mana,
+    required this.Condition,
+    required this.Power,
+    required this.Effectiveness,
+    required this.Armor,
     this.Kind,
-    this.isHit=false,
+    this.isHit = false,
   }) {
     copyCharacter();
   }

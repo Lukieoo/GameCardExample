@@ -6,7 +6,7 @@ import 'package:myflutek/Fight.dart';
 
 import 'Character.dart';
 import 'Kind_Enum.dart';
-import 'cardGame.dart';
+import 'CardGame.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -44,7 +44,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Timer _timer;
+  Timer? _timer;
   int _start = 0;
 
   void startTimer() {
@@ -54,10 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
       (Timer timer) => setState(
         () {
           if (character1.HP <= 0 || character2.HP <= 0) {
-            var winner =
-                (character1.HP <= 0) ? character2.Nick : character1.Nick;
-            var winner2 =
-                (character2.HP <= 0) ? character1.Nick : character2.Nick;
+            var winner = (character1.HP <= 0) ? character2.Nick : character1.Nick;
+            var winner2 = (character2.HP <= 0) ? character1.Nick : character2.Nick;
 
             if (winner != winner2) {
               winner = "Remis";
@@ -70,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: Text("Zwycięzcom zostaje"),
                   content: Text(winner),
                   actions: <Widget>[
-                    FlatButton(
+                    ElevatedButton(
                       child: Text('Ok'),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -129,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _visible = !_visible;
       character1.returnCharacter();
       character2.returnCharacter();
-      _timer.cancel();
+      _timer?.cancel();
     });
   }
 
@@ -190,11 +188,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Text("Fight"),
                             ),
                           ),
-                      
                         ],
                       ),
                       CardGame(
-                        character: character2,oponnet: character1,
+                        character: character2,
+                        oponnet: character1,
                       )
                     ],
                   ),

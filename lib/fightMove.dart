@@ -3,19 +3,18 @@ import 'package:flutter/animation.dart';
 
 class LogoApp extends StatefulWidget {
   final String damage;
-  LogoApp({this.damage});
+  LogoApp({required this.damage});
   _LogoAppState createState() => _LogoAppState();
 }
 
 class _LogoAppState extends State<LogoApp> with TickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
 
-  AnimationController controller;
-  Animation<double> animation;
-
+  @override
   initState() {
     super.initState();
-    controller = AnimationController(
-        duration: const Duration(milliseconds: 1000), vsync: this);
+    controller = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
 
     animation.addStatusListener((status) {
@@ -31,18 +30,9 @@ class _LogoAppState extends State<LogoApp> with TickerProviderStateMixin {
   }
 
   Widget build(BuildContext context) {
-
     return Container(
-        
         child: FadeTransition(
             opacity: animation,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                 Text(widget.damage)
-                ]
-            )
-        )
-    );
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text(widget.damage)])));
   }
 }
